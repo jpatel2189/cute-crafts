@@ -1,0 +1,89 @@
+<div class="login-container">
+  <div class="section-box" style="background: linear-gradient(180deg, #FFF 17.21%, #D5FFF3 100%)">
+    <div class="container">
+      <div>
+        <div class="login-box login-page">
+          <div class="form-header">
+            <div class="login-header text-center">
+              <h2 class="form-heading login-title">Login</h2>
+              <p class="login-sub-title">
+                Don’t have an account <a href="register.html">Register? </a>
+              </p>
+            </div>
+            <form action="#" class="form_input_box">
+              <div class="row">
+                <div class="col-12">
+                  <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-control" />
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="form-group mb-0">
+                    <label class="form-label">Password</label>
+                    <div class="input_iconBox">
+                      <input [type]="showPassword ? 'text' : 'password'" class="form-control" id="password" />
+                      <span class="toggle-password password_icon" [class.password_show]="showPassword"
+                        (click)="togglePassword()">
+                        <svg className="password_showIcon" xmlns="http://www.w3.org/2000/svg" width=18 height=18
+                          viewBox="0 0 20 20" fill="none" [style.display]="showPassword ? 'none' : 'block'">
+                          <path
+                            d="M12.1083 7.89166L7.8916 12.1083C7.34994 11.5667 7.0166 10.825 7.0166 10C7.0166 8.35 8.34993 7.01666 9.99993 7.01666C10.8249 7.01666 11.5666 7.35 12.1083 7.89166Z"
+                            stroke="#000000" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                          <path
+                            d="M14.8499 4.80834C13.3915 3.70834 11.7249 3.10834 9.99987 3.10834C7.0582 3.10834 4.31654 4.84167 2.4082 7.84167C1.6582 9.01667 1.6582 10.9917 2.4082 12.1667C3.06654 13.2 3.8332 14.0917 4.66654 14.8083"
+                            stroke="#000000" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                          <path
+                            d="M7.0166 16.275C7.9666 16.675 8.97493 16.8917 9.99993 16.8917C12.9416 16.8917 15.6833 15.1583 17.5916 12.1583C18.3416 10.9833 18.3416 9.00834 17.5916 7.83334C17.3166 7.4 17.0166 6.99167 16.7083 6.60834"
+                            stroke="#000000" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                          <path d="M12.9252 10.5834C12.7085 11.7584 11.7502 12.7167 10.5752 12.9334" stroke="#000000"
+                            strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                          <path d="M7.89199 12.1083L1.66699 18.3333" stroke="#000000" strokeWidth="1.5"
+                            strokeLinecap="round" strokeLinejoin="round" />
+                          <path d="M18.3334 1.66669L12.1084 7.89169" stroke="#000000" strokeWidth="1.5"
+                            strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                        <svg class="password_hideIcon" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                          viewBox="0 0 20 20" fill="none" [style.display]="showPassword ? 'block' : 'none'">
+                          <path
+                            d="M12.9833 10.0001C12.9833 11.6501 11.6499 12.9834 9.99993 12.9834C8.34993 12.9834 7.0166 11.6501 7.0166 10.0001C7.0166 8.35006 8.34993 7.01672 9.99993 7.01672C11.6499 7.01672 12.9833 8.35006 12.9833 10.0001Z"
+                            stroke="#000000" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                          <path
+                            d="M9.99987 16.8916C12.9415 16.8916 15.6832 15.1583 17.5915 12.1583C18.3415 10.9833 18.3415 9.00831 17.5915 7.83331C15.6832 4.83331 12.9415 3.09998 9.99987 3.09998C7.0582 3.09998 4.31654 4.83331 2.4082 7.83331C1.6582 9.00831 1.6582 10.9833 2.4082 12.1583C4.31654 15.1583 7.0582 16.8916 9.99987 16.8916Z"
+                            stroke="#000000" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="account-register-box">
+                    <div class="form-custom-check">
+                      <div class="custom-control custom-checkbox">
+                        <div class="form-group mb-0 custom_checkbox d-flex align-items-center">
+                          <input type="checkbox" id="check1" />
+                          <label for="check1">Remember me</label>
+                        </div>
+                      </div>
+                    </div>
+                    <a routerLink="/forgot-password" class="forgot-password">Forgot Password?</a>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="button-box text-center">
+                    <button class="btn-primary min-btn-login" type="submit">Login</button>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="back-login-btn">
+                    Back to <a routerLink="/">Home</a>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

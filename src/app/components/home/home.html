@@ -1,0 +1,107 @@
+<!-- HERO SECTION -->
+<section class="hero-section">
+  <div class="container">
+    <div class="row align-items-center">
+
+      <div class="col-lg-6 text-center text-lg-start">
+        <h1 class="hero-title">
+          Handmade Crochet <br />
+          <span>Crafted with Love</span>
+        </h1>
+        <p class="hero-subtitle">
+          Unique crochet gifts, accessories & cute handmade creations.
+          Order directly on WhatsApp.
+        </p>
+
+        <a href="https://wa.me/919549727335" target="_blank" class="btn btn-whatsapp btn-lg">
+          <i class="bi bi-whatsapp me-2"></i>
+          Order on WhatsApp
+        </a>
+      </div>
+
+      <div class="col-lg-6 text-center mt-4 mt-lg-0">
+        <img src="assets/img/IMG-6.jpeg" alt="Crochet handmade" class="hero-image" />
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED PRODUCTS -->
+<section class="section-padding bg-light">
+  <div class="container">
+    <div class="section-title text-center">
+      <h2>Featured Creations</h2>
+      <p>Our most loved crochet products</p>
+    </div>
+
+    <div class="row g-4">
+
+      <!-- Product Card -->
+      <div class="col-sm-6 col-md-4 col-lg-3" *ngFor="let img of [
+        'IMG-1.jpeg','IMG-2.jpeg','IMG-3.jpeg','IMG-4.jpeg',
+        'IMG-9.jpeg','IMG-10.jpeg','IMG-11.jpeg','IMG-12.jpeg'
+      ]">
+        <div class="product-card">
+          <img [src]="'assets/img/' + img" class="product-img" alt="Crochet Product" />
+
+          <div class="product-body">
+            <h6>Handmade Crochet</h6>
+            <p>Beautifully crafted crochet item</p>
+
+            <a href="https://wa.me/919549727335" target="_blank" class="btn btn-outline-whatsapp btn-sm">
+              <i class="bi bi-whatsapp"></i> Order
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WHY CHOOSE US -->
+<section class="section-padding">
+  <div class="container">
+    <div class="row text-center">
+
+      <div class="col-md-4">
+        <div class="feature-box">
+          <i class="bi bi-heart-fill"></i>
+          <h5>Handmade with Care</h5>
+          <p>Every stitch is made with patience and love.</p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="feature-box">
+          <i class="bi bi-stars"></i>
+          <h5>Unique Designs</h5>
+          <p>No two products are exactly the same.</p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="feature-box">
+          <i class="bi bi-whatsapp"></i>
+          <h5>Easy Ordering</h5>
+          <p>Just message us on WhatsApp to place your order.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container text-center">
+    <h2>Looking for a Custom Crochet Gift?</h2>
+    <p>We accept custom orders made just for you.</p>
+
+    <a href="https://wa.me/919549727335" target="_blank" class="btn btn-whatsapp btn-lg">
+      <i class="bi bi-whatsapp me-2"></i>
+      Chat on WhatsApp
+    </a>
+  </div>
+</section>

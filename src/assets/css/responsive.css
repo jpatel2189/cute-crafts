@@ -1,0 +1,35 @@
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1360px;
+    }
+}
+
+@media (min-width: 1530px) {
+    .container {
+        max-width: 1520px;
+    }
+}
+
+
+@media (min-width:1199.98px) and (max-width:1399.98px) {}
+
+@media (max-width:1199.98px) {}
+
+@media (max-width:767.98px) {}
+
+@media (max-width:575.98px) {
+
+    .btn-primary,
+    .btn-secondary {
+        font-size: 16px;
+        padding: 10px 25px;
+    }
+
+    .form-group {
+        margin-bottom: 22px;
+    }
+
+    .custom_checkbox label {
+        font-size: 15px;
+    }
+}
