@@ -1,59 +1,67 @@
 <footer class="app-footer">
     <div class="container">
-        <div class="row">
+        
+        <!-- Compact Single Row Layout -->
+        <div class="row align-items-center">
+            
+            <!-- Brand & Products -->
+            <div class="col-md-5 mb-3 mb-md-0">
+                <img [src]="brandInfo.logo" 
+                     [alt]="brandInfo.name" 
+                     class="footer-logo" />
+                
+                <div class="footer-brand">
+                    <h5 class="brand-name">{{ brandInfo.name }}</h5>
+                    <p class="brand-tagline">{{ brandInfo.tagline }}</p>
+                </div>
 
-            <!-- Brand -->
-            <div class="col-md-4 mb-4">
-                <img src="assets/img/cc-logo.png" alt="Cute Crafts Gifts" class="footer-logo" />
-
-                <p class="footer-text">
-                    Handmade crochet gifts crafted with love.
-                    Each piece is unique and carefully made for you.
-                </p>
+                <!-- Product Tags -->
+                <div class="product-tags">
+                    <span *ngFor="let product of products" class="product-tag">
+                        {{ product }}
+                    </span>
+                </div>
             </div>
 
             <!-- Quick Links -->
-            <div class="col-md-4 mb-4">
-                <h5 class="footer-title">Quick Links</h5>
+            <div class="col-md-3 mb-3 mb-md-0">
                 <ul class="footer-links">
-                    <li><a routerLink="/">Home</a></li>
-                    <li><a routerLink="/products">Products</a></li>
-                    <li><a routerLink="/about">About</a></li>
+                    <li *ngFor="let link of quickLinks">
+                        <a [routerLink]="link.route" 
+                           [attr.aria-label]="'Navigate to ' + link.label">
+                            {{ link.label }}
+                        </a>
+                    </li>
                 </ul>
             </div>
 
-            <!-- Social / Contact -->
-            <div class="col-md-4 mb-4">
-                <h5 class="footer-title">Connect With Us</h5>
-
-                <p class="footer-text">
-                    Follow us on Instagram for latest crochet creations
-                    or place your order directly on WhatsApp.
-                </p>
-
+            <!-- Social Links -->
+            <div class="col-md-4 text-md-end">
                 <div class="footer-socials">
-                    <a href="https://www.instagram.com/cutecraftsgifts/" target="_blank" class="social-icon instagram"
-                        aria-label="Instagram">
-                        <i class="bi bi-instagram"></i>
-                    </a>
-
-                    <a href="https://wa.me/919549727335" target="_blank" class="social-icon whatsapp"
-                        aria-label="WhatsApp">
-                        <i class="bi bi-whatsapp"></i>
+                    <a *ngFor="let social of socialLinks"
+                       [href]="social.url" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       [class]="'social-icon ' + social.class"
+                       [attr.aria-label]="social.ariaLabel">
+                        <i [class]="social.icon"></i>
                     </a>
                 </div>
             </div>
 
         </div>
 
-        <!-- Divider -->
-        <hr class="footer-divider" />
-
-        <!-- Bottom -->
+        <!-- Bottom Copyright -->
         <div class="footer-bottom text-center">
             <p>
-                © {{ currentYear }} Cute Crafts Gifts. All rights reserved.
+                © {{ currentYear }} {{ brandInfo.name }}. All rights reserved.
             </p>
+            <div class="made-with-love">
+                <span>Made with</span>
+                <span class="heart">♥</span>
+                <span>and premium wool</span>
+            </div>
         </div>
+
     </div>
 </footer>

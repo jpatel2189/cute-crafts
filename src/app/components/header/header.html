@@ -1,15 +1,24 @@
-<header class="app-header shadow-sm">
+<header class="app-header">
     <nav class="navbar navbar-expand-lg navbar-light container">
 
-        <!-- Logo -->
-        <a class="navbar-brand d-flex align-items-center" routerLink="/">
-            <img src="assets/img/cc-logo.png" alt="Cute Crafts Gifts" class="logo-img" />
-            <span class="brand-text ms-2">Cute Crafts Gifts</span>
+        <!-- Logo & Brand -->
+        <a class="navbar-brand d-flex align-items-center" 
+           routerLink="/"
+           [attr.aria-label]="brandInfo.name + ' - Home'">
+            <img [src]="brandInfo.logo" 
+                 [alt]="brandInfo.name" 
+                 class="logo-img" />
+            <span class="brand-text ms-2">{{ brandInfo.name }}</span>
         </a>
 
         <!-- Mobile Toggle -->
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
-            aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" 
+                type="button" 
+                data-bs-toggle="collapse" 
+                data-bs-target="#mainNavbar"
+                aria-controls="mainNavbar" 
+                aria-expanded="false" 
+                aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -17,15 +26,19 @@
         <div class="collapse navbar-collapse" id="mainNavbar">
             <div class="ms-auto d-flex flex-column flex-lg-row align-items-lg-center">
 
-                <!-- Cute Line -->
+                <!-- Cute Tagline with heart -->
                 <span class="header-tagline me-lg-3 mb-2 mb-lg-0">
-                    Handmade with love
+                    {{ brandInfo.tagline }}
                 </span>
 
-                <!-- WhatsApp CTA -->
-                <a class="btn btn-whatsapp" href="https://wa.me/919549727335" target="_blank">
+                <!-- WhatsApp CTA Button -->
+                <a class="btn btn-whatsapp" 
+                   [href]="whatsappUrl" 
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   aria-label="Order on WhatsApp">
                     <i class="bi bi-whatsapp me-1"></i>
-                    Order on WhatsApp
+                    <span>Order on WhatsApp</span>
                 </a>
 
             </div>

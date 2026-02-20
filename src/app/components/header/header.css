@@ -1,83 +1,266 @@
-/* Header wrapper */
+/* Header wrapper - Enhanced */
 .app-header {
-  background-color: #fffaf5;
+  background: linear-gradient(135deg, #fffaf5 0%, #fff5eb 100%);
   position: sticky;
   top: 0;
   z-index: 1000;
+  box-shadow: 0 2px 20px rgba(140, 94, 79, 0.08);
+  transition: all 0.3s ease;
+  border-bottom: 2px solid rgba(140, 94, 79, 0.08);
 }
 
-/* Logo */
+/* Scrolled state */
+.app-header.scrolled {
+  box-shadow: 0 4px 30px rgba(140, 94, 79, 0.15);
+  border-bottom-color: rgba(140, 94, 79, 0.12);
+}
+
+/* Navbar container */
+.navbar {
+  padding: 12px 0;
+  transition: padding 0.3s ease;
+}
+
+.app-header.scrolled .navbar {
+  padding: 8px 0;
+}
+
+/* Logo - Enhanced */
 .logo-img {
-  height: 70px;
+  height: 65px;
   width: auto;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  filter: drop-shadow(0 2px 8px rgba(140, 94, 79, 0.15));
 }
 
-/* Brand text */
+.app-header.scrolled .logo-img {
+  height: 55px;
+}
+
+.logo-img:hover {
+  transform: scale(1.05) rotate(-2deg);
+}
+
+/* Brand text - Enhanced */
 .brand-text {
-  font-size: 1.2rem;
-  font-weight: 600;
+  font-size: 1.3rem;
+  font-weight: 700;
   color: #8c5e4f;
-  letter-spacing: 0.3px;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  text-shadow: 0 1px 3px rgba(140, 94, 79, 0.1);
+  position: relative;
 }
 
-/* Nav links */
-.navbar-nav .nav-link {
-  font-weight: 500;
-  color: #5c4a42;
-  margin: 0 8px;
-  transition: color 0.2s ease;
+.navbar-brand:hover .brand-text {
+  color: #6d4a3f;
+  transform: translateX(3px);
 }
 
-.navbar-nav .nav-link:hover {
-  color: #d6a77a;
-}
-
-.navbar-nav .nav-link.active {
-  color: #d6a77a;
-}
-
-/* WhatsApp Button */
-.btn-whatsapp {
-  background-color: #25d366;
-  color: #fff;
-  font-weight: 500;
-  padding: 8px 14px;
-  border-radius: 25px;
-  font-size: 0.9rem;
-  transition: background-color 0.2s ease;
-}
-
-.btn-whatsapp:hover {
-  background-color: #1ebe5d;
-  color: #fff;
-}
-
-/* Mobile adjustments */
-@media (max-width: 991px) {
-  .brand-text {
-    font-size: 1.05rem;
-  }
-
-  .btn-whatsapp {
-    margin-top: 10px;
-    width: 100%;
-    text-align: center;
-  }
-}
-
-/* Cute tagline */
+/* Tagline - Enhanced with cute animation */
 .header-tagline {
   font-size: 0.95rem;
   color: #8c5e4f;
-  font-weight: 500;
-  letter-spacing: 0.3px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
   white-space: nowrap;
+  padding: 6px 16px;
+  background: rgba(140, 94, 79, 0.08);
+  border-radius: 20px;
+  border: 1px solid rgba(140, 94, 79, 0.15);
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
-/* Mobile alignment */
+.header-tagline::before {
+  content: '♥';
+  color: #ff6b9d;
+  animation: heartbeat 1.5s ease-in-out infinite;
+  display: inline-block;
+}
+
+.header-tagline:hover {
+  background: rgba(140, 94, 79, 0.12);
+  transform: translateY(-2px);
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  10%, 30% { transform: scale(1.2); }
+  20%, 40% { transform: scale(1.1); }
+}
+
+/* WhatsApp Button - Enhanced */
+.btn-whatsapp {
+  background: linear-gradient(135deg, #25d366 0%, #128C7E 100%);
+  color: #fff;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-size: 0.95rem;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  border: 2px solid transparent;
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-whatsapp::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: translate(-50%, -50%);
+  transition: width 0.5s, height 0.5s;
+}
+
+.btn-whatsapp:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.btn-whatsapp:hover {
+  background: linear-gradient(135deg, #2edf73 0%, #1aa88d 100%);
+  color: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+}
+
+.btn-whatsapp:active {
+  transform: translateY(-1px);
+}
+
+.btn-whatsapp i {
+  transition: transform 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.btn-whatsapp:hover i {
+  transform: scale(1.15) rotate(15deg);
+}
+
+/* Mobile adjustments - Enhanced */
 @media (max-width: 991px) {
+  .app-header {
+    box-shadow: 0 2px 15px rgba(140, 94, 79, 0.1);
+  }
+
+  .logo-img {
+    height: 55px;
+  }
+
+  .brand-text {
+    font-size: 1.1rem;
+  }
+
+  .btn-whatsapp {
+    margin-top: 15px;
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+
   .header-tagline {
     text-align: center;
-    margin-top: 10px;
+    margin-top: 15px;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .navbar-collapse {
+    padding-top: 15px;
+  }
+}
+
+/* Navbar toggler - Enhanced */
+.navbar-toggler {
+  border: 2px solid #8c5e4f;
+  border-radius: 8px;
+  padding: 8px 12px;
+  transition: all 0.3s ease;
+}
+
+.navbar-toggler:hover {
+  background: rgba(140, 94, 79, 0.1);
+  transform: scale(1.05);
+}
+
+.navbar-toggler:focus {
+  box-shadow: 0 0 0 0.2rem rgba(140, 94, 79, 0.25);
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(140, 94, 79, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* Smooth collapse animation */
+.navbar-collapse {
+  transition: max-height 0.3s ease-in-out;
+}
+
+/* Accessibility improvements */
+.navbar-brand:focus,
+.btn-whatsapp:focus {
+  outline: 3px solid #8c5e4f;
+  outline-offset: 3px;
+}
+
+/* Loading animation */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.app-header {
+  animation: slideDown 0.4s ease-out;
+}
+
+/* Subtle decorative element */
+.app-header::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    #d6a77a 20%, 
+    #8c5e4f 50%, 
+    #d6a77a 80%, 
+    transparent 100%);
+  opacity: 0.3;
+}
+
+/* Desktop hover effects */
+@media (min-width: 992px) {
+  .ms-auto {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+}
+
+/* Tablet adjustments */
+@media (min-width: 768px) and (max-width: 991px) {
+  .logo-img {
+    height: 60px;
+  }
+
+  .brand-text {
+    font-size: 1.2rem;
   }
 }
