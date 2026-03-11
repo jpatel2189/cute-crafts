@@ -1,107 +1,328 @@
-<!-- HERO SECTION -->
-<section class="hero-section">
-  <div class="container">
-    <div class="row align-items-center">
+<!-- Toast Notification -->
+<div class="toast-container" id="toastContainer"></div>
 
-      <div class="col-lg-6 text-center text-lg-start">
-        <h1 class="hero-title">
-          Handmade Crochet <br />
-          <span>Crafted with Love</span>
-        </h1>
-        <p class="hero-subtitle">
-          Unique crochet gifts, accessories & cute handmade creations.
-          Order directly on WhatsApp.
-        </p>
+<!-- Scroll Progress Bar -->
+<div class="scroll-progress" id="scrollProgress"></div>
 
-        <a href="https://wa.me/919549727335" target="_blank" class="btn btn-whatsapp btn-lg">
-          <i class="bi bi-whatsapp me-2"></i>
-          Order on WhatsApp
-        </a>
-      </div>
+<!-- Floating Cart Button -->
+<div class="cart-fab" (click)="toggleCart()" [class.bounce]="cartBounce">
+  <span class="cart-icon">🛒</span>
+  <span class="badge" *ngIf="getCartCount() > 0">{{ getCartCount() }}</span>
+</div>
 
-      <div class="col-lg-6 text-center mt-4 mt-lg-0">
-        <img src="assets/img/IMG-6.jpeg" alt="Crochet handmade" class="hero-image" />
-      </div>
+<!-- Wishlist FAB -->
+<div class="wishlist-fab" (click)="toggleWishlistPanel()">
+  <span>♡</span>
+  <span class="badge" *ngIf="getWishlistCount() > 0">{{ getWishlistCount() }}</span>
+</div>
 
+<!-- ═══════════════════ HERO SECTION ═══════════════════ -->
+<section class="hero-container">
+
+  <div *ngFor="let img of heroImages; let i = index"
+       class="hero-slide"
+       [class.active]="i === activeHeroIndex"
+       [style.backgroundImage]="'url(assets/img/' + img + ')'">
+  </div>
+
+  <div class="hero-overlay"></div>
+
+  <div class="hero-text">
+    <div class="hero-eyebrow">✦ Handcrafted with Love ✦</div>
+    <h1>Cute<br><em>Crafts</em></h1>
+    <p>Artisan crochet pieces — each one a tiny world<br>of warmth and whimsy</p>
+    <div class="hero-actions">
+      <button class="btn-hero-primary" (click)="scrollToShop()">
+        Explore Collection
+      </button>
+      <button class="btn-hero-secondary" (click)="toggleWishlistPanel()">
+        ♡ Wishlist
+      </button>
     </div>
+    <div class="hero-stats">
+      <div class="stat"><span>{{ products.length }}</span> Products</div>
+      <div class="stat-divider">·</div>
+      <div class="stat"><span>100%</span> Handmade</div>
+      <div class="stat-divider">·</div>
+      <div class="stat"><span>✦</span> Made to Order</div>
+    </div>
+  </div>
+
+  <!-- Hero Dot Navigation -->
+  <div class="hero-dots">
+    <button *ngFor="let img of heroImages; let i = index"
+            class="hero-dot"
+            [class.active]="i === activeHeroIndex"
+            (click)="goToHeroSlide(i)">
+    </button>
+  </div>
+
+  <div class="scroll-hint">
+    <span>scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+
+</section>
+
+<!-- ═══════════════════ FILTER & SEARCH ═══════════════════ -->
+<section class="filter-section" id="shop">
+  <div class="container">
+
+    <div class="section-header">
+      <div class="section-tag">Our Collection</div>
+      <h2>Handpicked <em>Just for You</em></h2>
+      <p>Every piece crocheted with premium yarn and loads of love</p>
+    </div>
+
+    <div class="filter-bar">
+      <div class="search-wrap">
+        <span class="search-icon">⌕</span>
+        <input type="text"
+               class="search-input"
+               placeholder="Search products..."
+               [(ngModel)]="searchQuery"
+               (input)="applyFilters()">
+        <button class="search-clear" *ngIf="searchQuery" (click)="clearSearch()">✕</button>
+      </div>
+
+      <div class="filter-tabs">
+        <button *ngFor="let cat of categories"
+                class="filter-tab"
+                [class.active]="activeCategory === cat"
+                (click)="setCategory(cat)">
+          {{ cat }}
+        </button>
+      </div>
+
+      <div class="sort-wrap">
+        <select class="sort-select" [(ngModel)]="sortBy" (change)="applyFilters()">
+          <option value="default">Sort: Default</option>
+          <option value="price-asc">Price: Low → High</option>
+          <option value="price-desc">Price: High → Low</option>
+          <option value="name">Name A–Z</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="results-info" *ngIf="filteredProducts.length !== products.length">
+      Showing {{ filteredProducts.length }} of {{ products.length }} products
+      <button class="reset-filters" (click)="resetFilters()">Clear Filters</button>
+    </div>
+
   </div>
 </section>
 
-<!-- FEATURED PRODUCTS -->
-<section class="section-padding bg-light">
+<!-- ═══════════════════ PRODUCTS GRID ═══════════════════ -->
+<section class="products-section">
   <div class="container">
-    <div class="section-title text-center">
-      <h2>Featured Creations</h2>
-      <p>Our most loved crochet products</p>
-    </div>
 
-    <div class="row g-4">
+    <div class="products-grid">
 
-      <!-- Product Card -->
-      <div class="col-sm-6 col-md-4 col-lg-3" *ngFor="let img of [
-        'IMG-1.jpeg','IMG-2.jpeg','IMG-3.jpeg','IMG-4.jpeg',
-        'IMG-9.jpeg','IMG-10.jpeg','IMG-11.jpeg','IMG-12.jpeg'
-      ]">
-        <div class="product-card">
-          <img [src]="'assets/img/' + img" class="product-img" alt="Crochet Product" />
+      <div class="col-product"
+           *ngFor="let product of filteredProducts; let i = index">
 
-          <div class="product-body">
-            <h6>Handmade Crochet</h6>
-            <p>Beautifully crafted crochet item</p>
+        <div class="product-card" [class.wishlisted]="product.wishlist">
 
-            <a href="https://wa.me/919549727335" target="_blank" class="btn btn-outline-whatsapp btn-sm">
-              <i class="bi bi-whatsapp"></i> Order
-            </a>
+          <!-- Badge -->
+          <div class="product-badge" *ngIf="product.badge">{{ product.badge }}</div>
+
+          <!-- Image Viewer -->
+          <div class="image-viewer"
+               (touchstart)="onTouchStart($event)"
+               (touchend)="onTouchEnd($event, product.index)">
+
+            <div *ngFor="let img of product.images; let imgIdx = index"
+                 class="img-slide"
+                 [class.active]="imgIdx === product.currentImage">
+              <img [src]="'assets/img/' + img" [alt]="product.name" loading="lazy">
+            </div>
+
+            <button class="slide-nav prev" (click)="prevImage(product.index)" *ngIf="product.images.length > 1">&#8249;</button>
+            <button class="slide-nav next" (click)="nextImage(product.index)" *ngIf="product.images.length > 1">&#8250;</button>
+
+            <!-- Image Dots -->
+            <div class="img-dots" *ngIf="product.images.length > 1">
+              <span *ngFor="let img of product.images; let d = index"
+                    class="img-dot"
+                    [class.active]="d === product.currentImage"
+                    (click)="goToImage(product.index, d)">
+              </span>
+            </div>
+
+            <!-- Wishlist Button -->
+            <button class="wishlist-btn" (click)="toggleWishlist(product)" [class.active]="product.wishlist">
+              <span *ngIf="!product.wishlist">♡</span>
+              <span *ngIf="product.wishlist">♥</span>
+            </button>
+
+            <!-- Quick View Overlay -->
+            <div class="card-hover-overlay">
+              <button class="btn-quick-add" (click)="addToCart(product)">
+                + Add to Cart
+              </button>
+            </div>
+
           </div>
+
+          <!-- Product Info -->
+          <div class="product-info">
+            <div class="product-type">{{ product.type }}</div>
+            <h6 class="product-name">{{ product.name }}</h6>
+            <div class="product-footer">
+              <span class="price">&#8377;{{ product.price }}</span>
+              <button class="btn-add-cart" (click)="addToCart(product)">
+                <span class="btn-icon">🛒</span>
+              </button>
+            </div>
+          </div>
+
         </div>
+      </div>
+
+      <!-- Empty State -->
+      <div class="empty-state" *ngIf="filteredProducts.length === 0">
+        <div class="empty-icon">🧶</div>
+        <h3>No products found</h3>
+        <p>Try adjusting your search or filters</p>
+        <button class="btn-reset" (click)="resetFilters()">Show All Products</button>
       </div>
 
     </div>
   </div>
 </section>
 
-<!-- WHY CHOOSE US -->
-<section class="section-padding">
+<!-- ═══════════════════ ABOUT STRIP ═══════════════════ -->
+<section class="about-strip">
   <div class="container">
-    <div class="row text-center">
-
-      <div class="col-md-4">
-        <div class="feature-box">
-          <i class="bi bi-heart-fill"></i>
-          <h5>Handmade with Care</h5>
-          <p>Every stitch is made with patience and love.</p>
-        </div>
+    <div class="about-grid">
+      <div class="about-item">
+        <div class="about-icon">🧶</div>
+        <h4>Premium Yarn</h4>
+        <p>Soft, durable yarns sourced for quality and comfort</p>
       </div>
-
-      <div class="col-md-4">
-        <div class="feature-box">
-          <i class="bi bi-stars"></i>
-          <h5>Unique Designs</h5>
-          <p>No two products are exactly the same.</p>
-        </div>
+      <div class="about-item">
+        <div class="about-icon">🤲</div>
+        <h4>Fully Handmade</h4>
+        <p>Every stitch crafted by hand — no machines, ever</p>
       </div>
-
-      <div class="col-md-4">
-        <div class="feature-box">
-          <i class="bi bi-whatsapp"></i>
-          <h5>Easy Ordering</h5>
-          <p>Just message us on WhatsApp to place your order.</p>
-        </div>
+      <div class="about-item">
+        <div class="about-icon">📦</div>
+        <h4>Lovingly Packed</h4>
+        <p>Gift-ready packaging for every single order</p>
       </div>
-
+      <div class="about-item">
+        <div class="about-icon">💬</div>
+        <h4>Custom Orders</h4>
+        <p>Want a custom colour or size? Just ask!</p>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- CTA -->
-<section class="cta-section">
-  <div class="container text-center">
-    <h2>Looking for a Custom Crochet Gift?</h2>
-    <p>We accept custom orders made just for you.</p>
+<!-- ═══════════════════ CART OVERLAY & PANEL ═══════════════════ -->
+<div class="panel-overlay"
+     [class.show]="cartOpen || wishlistOpen"
+     (click)="closeAllPanels()">
+</div>
 
-    <a href="https://wa.me/919549727335" target="_blank" class="btn btn-whatsapp btn-lg">
-      <i class="bi bi-whatsapp me-2"></i>
-      Chat on WhatsApp
-    </a>
+<!-- Cart Panel -->
+<div class="cart-panel" [class.open]="cartOpen">
+
+  <div class="panel-header">
+    <div class="panel-title">
+      <span class="panel-icon">🛒</span>
+      Your Basket
+      <span class="panel-count" *ngIf="cart.length > 0">{{ getCartCount() }} items</span>
+    </div>
+    <button class="panel-close" (click)="toggleCart()">✕</button>
   </div>
-</section>
+
+  <div class="cart-scroll">
+
+    <div class="cart-empty" *ngIf="cart.length === 0">
+      <div class="cart-empty-icon">🛒</div>
+      <h4>Your cart is empty</h4>
+      <p>Add some beautiful crochet pieces!</p>
+      <button class="btn-start-shopping" (click)="toggleCart()">Start Shopping</button>
+    </div>
+
+    <div *ngFor="let item of cart; let idx = index" class="cart-item">
+
+      <img [src]="'assets/img/' + item.image" [alt]="item.name" class="cart-item-image">
+
+      <div class="cart-item-details">
+        <div class="cart-item-type">{{ item.type }}</div>
+        <h6 class="cart-item-name">{{ item.name }}</h6>
+        <div class="cart-item-price">&#8377;{{ item.price * item.quantity }}</div>
+
+        <div class="qty-controls">
+          <button class="qty-btn" (click)="decreaseQty(idx)">−</button>
+          <span class="qty-value">{{ item.quantity }}</span>
+          <button class="qty-btn" (click)="increaseQty(idx)">+</button>
+        </div>
+      </div>
+
+      <button class="cart-item-remove" (click)="removeFromCart(idx)" title="Remove">✕</button>
+
+    </div>
+
+  </div>
+
+  <div class="panel-footer" *ngIf="cart.length > 0">
+    <div class="cart-total">
+      <div>
+        <div class="total-label">Total</div>
+        <div class="total-sub">{{ getCartCount() }} item(s)</div>
+      </div>
+      <div class="total-amount">&#8377;{{ getTotal() }}</div>
+    </div>
+    <button class="btn-whatsapp" (click)="orderOnWhatsApp()">
+      <span>💬</span> Order via WhatsApp
+    </button>
+    <button class="btn-clear-cart" (click)="clearCart()" *ngIf="cart.length > 1">
+      Clear Cart
+    </button>
+  </div>
+
+</div>
+
+<!-- ═══════════════════ WISHLIST PANEL ═══════════════════ -->
+<div class="cart-panel wishlist-panel" [class.open]="wishlistOpen">
+
+  <div class="panel-header">
+    <div class="panel-title">
+      <span class="panel-icon">♥</span>
+      Wishlist
+      <span class="panel-count" *ngIf="getWishlistCount() > 0">{{ getWishlistCount() }}</span>
+    </div>
+    <button class="panel-close" (click)="toggleWishlistPanel()">✕</button>
+  </div>
+
+  <div class="cart-scroll">
+
+    <div class="cart-empty" *ngIf="getWishlistCount() === 0">
+      <div class="cart-empty-icon">♡</div>
+      <h4>Your wishlist is empty</h4>
+      <p>Tap the ♡ on any product to save it here</p>
+    </div>
+
+    <div *ngFor="let product of getWishlistItems()" class="cart-item">
+
+      <img [src]="'assets/img/' + product.images[0]" [alt]="product.name" class="cart-item-image">
+
+      <div class="cart-item-details">
+        <div class="cart-item-type">{{ product.type }}</div>
+        <h6 class="cart-item-name">{{ product.name }}</h6>
+        <div class="cart-item-price">&#8377;{{ product.price }}</div>
+        <button class="btn-add-from-wish" (click)="addToCart(product); toggleWishlistPanel()">
+          Add to Cart
+        </button>
+      </div>
+
+      <button class="cart-item-remove" (click)="toggleWishlist(product)" title="Remove from wishlist">✕</button>
+
+    </div>
+
+  </div>
+
+</div>
